@@ -131,10 +131,10 @@ const transitionVariants = {
 }
 
 const menuItems = [
-  { name: "Services", href: "#services" },
-  { name: "Solutions", href: "#solutions" },
-  { name: "About", href: "#about" },
-  { name: "Contact", href: "#contact" },
+  { name: "Problema", href: "#problema" },
+  { name: "Diagnóstico", href: "#diagnostico" },
+  { name: "Solución", href: "#solucion" },
+  { name: "Preguntas", href: "#preguntas" },
 ]
 
 const HeroHeader = () => {
@@ -296,7 +296,7 @@ export default function SoftwareDevelopmentWebsite() {
                     href="#services"
                     className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
                   >
-                    <span className="text-foreground text-sm">Custom Software Solutions for Small Business</span>
+                    <span className="text-foreground text-sm">Software de salida escolar · Cupos limitados para ciclo 2026-2027</span>
                     <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
 
                     <div className="bg-background group-hover:bg-muted size-6 overflow-hidden rounded-full duration-500">
@@ -312,14 +312,15 @@ export default function SoftwareDevelopmentWebsite() {
                   </a>
 
                   <h1 className="mt-8 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
-                    Transform Your Business with{" "}
+                    Salida escolar más rápida.{" "}
                     <span className="inline-block text-primary text-6xl md:text-7xl xl:text-[5.25rem] font-semibold">
-                      Custom Software
+                      Y con registro de cada entrega.
                     </span>
                   </h1>
                   <p className="mx-auto mt-8 max-w-2xl text-balance text-lg text-muted-foreground">
-                    We build scalable, efficient software solutions tailored to your business needs. From web
-                    applications to mobile apps, we help small businesses grow with technology.
+                    Olvídese de las filas, el altavoz y los grupos de WhatsApp.
+                    Ekole despacha más rápido y registra cada salida automáticamente
+                    — sin que un solo padre descargue nada.
                   </p>
                 </AnimatedGroup>
 
@@ -339,11 +340,11 @@ export default function SoftwareDevelopmentWebsite() {
                 >
                   <div key={1} className="bg-primary/10 rounded-[14px] border border-primary/30 p-0.5">
                     <Button size="lg" className="rounded-xl px-5 text-base bg-primary hover:bg-primary/90">
-                      <span className="text-nowrap">Get Free Consultation</span>
+                      <span className="text-nowrap">Ver cómo funciona con mi colegio</span>
                     </Button>
                   </div>
                   <Button key={2} size="lg" variant="ghost" className="h-10.5 rounded-xl px-5 hover:text-primary">
-                    <span className="text-nowrap">View Our Work</span>
+                    <span className="text-nowrap">¿Qué tan expuesta está mi salida hoy? — Test de 3 min</span>
                   </Button>
                 </AnimatedGroup>
               </div>
@@ -355,11 +356,10 @@ export default function SoftwareDevelopmentWebsite() {
           <div className="@container mx-auto max-w-5xl px-6">
             <div className="text-center">
               <h2 className="text-balance text-4xl font-semibold lg:text-5xl">
-                Why Choose <span className="text-primary">DevSolutions</span>
+                Ekole hace su salida <span className="text-primary">3 veces más rápida</span>
               </h2>
               <p className="mt-4 text-muted-foreground">
-                We deliver high-quality software solutions that help your business grow and succeed in the digital
-                world.
+                — y documenta cada entrega automáticamente.
               </p>
             </div>
             <Card className="@min-4xl:max-w-full @min-4xl:grid-cols-3 @min-4xl:divide-x @min-4xl:divide-y-0 mx-auto mt-8 grid max-w-sm divide-y overflow-hidden shadow-zinc-950/5 border-primary/20 *:text-center md:mt-16">
@@ -369,12 +369,13 @@ export default function SoftwareDevelopmentWebsite() {
                     <Zap className="size-6 text-primary" aria-hidden />
                   </CardDecorator>
 
-                  <h3 className="mt-6 font-medium">Fast Development</h3>
+                  <h3 className="mt-6 font-medium">Hasta 78% menos tiempo de salida</h3>
                 </CardHeader>
 
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    Rapid prototyping and agile development process to get your software to market quickly.
+                    Lo que hoy toma 40-60 minutos puede bajar a 12-15.
+                    El padre llega, recoge y se va — en minutos, no en filas.
                   </p>
                 </CardContent>
               </div>
@@ -385,12 +386,13 @@ export default function SoftwareDevelopmentWebsite() {
                     <Settings2 className="size-6 text-primary" aria-hidden />
                   </CardDecorator>
 
-                  <h3 className="mt-6 font-medium">Scalable Solutions</h3>
+                  <h3 className="mt-6 font-medium">Cada salida documentada automáticamente</h3>
                 </CardHeader>
 
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    Built to grow with your business, our solutions scale seamlessly as your needs evolve.
+                    Quién recogió, a qué hora, con qué autorización.
+                    Historial consultable. Sin trabajo adicional para su personal.
                   </p>
                 </CardContent>
               </div>
@@ -401,12 +403,13 @@ export default function SoftwareDevelopmentWebsite() {
                     <Sparkles className="size-6 text-primary" aria-hidden />
                   </CardDecorator>
 
-                  <h3 className="mt-6 font-medium">Modern Technology</h3>
+                  <h3 className="mt-6 font-medium">Su protección personal documentada</h3>
                 </CardHeader>
 
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    Using the latest technologies and best practices to ensure your software is future-proof.
+                    Si un padre reclama o hay una investigación: fecha, hora, clave verificada,
+                    tutor autorizado. Evidencia de diligencia — en su pantalla.
                   </p>
                 </CardContent>
               </div>
@@ -422,8 +425,9 @@ export default function SoftwareDevelopmentWebsite() {
             <div className="space-y-4 sm:col-span-2 lg:col-span-1">
               <Logo />
               <p className="text-sm text-muted-foreground max-w-xs">
-                Transform your business with custom software solutions. We build scalable applications that grow with
-                your success.
+                Creemos que ningún director debería quedar expuesto personalmente
+                por operar un proceso que, hasta hoy, no tenía solución viable.
+                Por eso creamos Ekole. — El equipo de Ekole
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="text-muted-foreground hover:text-primary transition-colors">

@@ -348,33 +348,6 @@ export default function SoftwareDevelopmentWebsite() {
                 </AnimatedGroup>
               </div>
             </div>
-
-            <AnimatedGroup
-              variants={{
-                container: {
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.05,
-                      delayChildren: 0.75,
-                    },
-                  },
-                },
-                ...transitionVariants,
-              }}
-            >
-              <div className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
-                <div
-                  aria-hidden
-                  className="bg-gradient-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
-                />
-                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border border-primary/20 p-4 shadow-lg shadow-primary/15 ring-1">
-                  <div className="bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 aspect-15/8 relative rounded-2xl border border-primary/20 overflow-hidden">
-                    <GridMotion items={gridItems} gradientColor="rgba(28, 61, 118, 0.1)" className="h-full w-full" />
-                  </div>
-                </div>
-              </div>
-
-            </AnimatedGroup>
           </div>
         </section>
 
@@ -482,7 +455,7 @@ export default function SoftwareDevelopmentWebsite() {
 
             {/* Services */}
             <div className="space-y-4">
-              <h3 className="text-sm font-semibold text-foreground">Services</h3>
+              <h3 className="text-sm font-semibold text-foreground">Calcu</h3>
               <ul className="space-y-2 text-sm">
                 <li>
                   <a href="#" className="text-muted-foreground hover:text-primary transition-colors">

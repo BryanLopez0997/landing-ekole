@@ -213,8 +213,8 @@ const HeroHeader = () => {
                   size="sm"
                   className={cn(
                     isScrolled
-                      ? "lg:inline-flex bg-orange-500 hover:bg-orange-600"
-                      : "hidden bg-orange-500 hover:bg-orange-600",
+                      ? "lg:inline-flex bg-primary hover:bg-primary/90"
+                      : "hidden bg-primary hover:bg-primary/90",
                   )}
                 >
                   <span>Get Started</span>
@@ -231,8 +231,8 @@ const HeroHeader = () => {
 const Logo = ({ className }: { className?: string }) => {
   return (
     <div className={cn("flex items-center space-x-2", className)}>
-      <div className="bg-orange-500 rounded-lg p-2">
-        <Code className="h-6 w-6 text-white" />
+      <div className="bg-primary rounded-lg p-2">
+        <Code className="h-6 w-6 text-primary-foreground" />
       </div>
       <span className="text-xl font-bold">Ekole</span>
     </div>
@@ -245,7 +245,7 @@ const CardDecorator = ({ children }: { children: React.ReactNode }) => (
     className="relative mx-auto size-36 [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"
   >
     <div className="absolute inset-0 [--border:black] dark:[--border:white] bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:24px_24px] opacity-10" />
-    <div className="bg-background absolute inset-0 m-auto flex size-12 items-center justify-center border-t border-l border-orange-200">
+    <div className="bg-background absolute inset-0 m-auto flex size-12 items-center justify-center border-t border-l border-primary/30">
       {children}
     </div>
   </div>
@@ -289,8 +289,8 @@ export default function SoftwareDevelopmentWebsite() {
           aria-hidden
           className="z-[2] absolute inset-0 pointer-events-none isolate opacity-50 contain-strict hidden lg:block"
         >
-          <div className="w-[35rem] h-[80rem] -translate-y-[350px] absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(25,100%,50%,.08)_0,hsla(25,100%,45%,.02)_50%,hsla(25,100%,40%,0)_80%)]" />
-          <div className="h-[80rem] absolute left-0 top-0 w-56 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(25,100%,50%,.06)_0,hsla(25,100%,45%,.02)_80%,transparent_100%)] [translate:5%_-50%]" />
+          <div className="w-[35rem] h-[80rem] -translate-y-[350px] absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(218,62%,29%,.10)_0,hsla(218,62%,29%,.04)_50%,hsla(218,62%,29%,0)_80%)]" />
+          <div className="h-[80rem] absolute left-0 top-0 w-56 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(218,62%,29%,.08)_0,hsla(218,62%,29%,.03)_80%,transparent_100%)] [translate:5%_-50%]" />
         </div>
 
         <section>
@@ -323,7 +323,7 @@ export default function SoftwareDevelopmentWebsite() {
 
                   <h1 className="mt-8 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
                     Transform Your Business with{" "}
-                    <span className="inline-block text-orange-500 text-6xl md:text-7xl xl:text-[5.25rem] font-semibold">
+                    <span className="inline-block text-primary text-6xl md:text-7xl xl:text-[5.25rem] font-semibold">
                       Custom Software
                     </span>
                   </h1>
@@ -347,12 +347,12 @@ export default function SoftwareDevelopmentWebsite() {
                   }}
                   className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
                 >
-                  <div key={1} className="bg-orange-500/10 rounded-[14px] border border-orange-200 p-0.5">
-                    <Button size="lg" className="rounded-xl px-5 text-base bg-orange-500 hover:bg-orange-600">
+                  <div key={1} className="bg-primary/10 rounded-[14px] border border-primary/30 p-0.5">
+                    <Button size="lg" className="rounded-xl px-5 text-base bg-primary hover:bg-primary/90">
                       <span className="text-nowrap">Get Free Consultation</span>
                     </Button>
                   </div>
-                  <Button key={2} size="lg" variant="ghost" className="h-10.5 rounded-xl px-5 hover:text-orange-500">
+                  <Button key={2} size="lg" variant="ghost" className="h-10.5 rounded-xl px-5 hover:text-primary">
                     <span className="text-nowrap">View Our Work</span>
                   </Button>
                 </AnimatedGroup>
@@ -377,9 +377,9 @@ export default function SoftwareDevelopmentWebsite() {
                   aria-hidden
                   className="bg-gradient-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
                 />
-                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border border-orange-200 p-4 shadow-lg shadow-orange-500/15 ring-1">
-                  <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-950 dark:to-orange-900 aspect-15/8 relative rounded-2xl border border-orange-200 overflow-hidden">
-                    <GridMotion items={gridItems} gradientColor="rgba(249, 115, 22, 0.1)" className="h-full w-full" />
+                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border border-primary/20 p-4 shadow-lg shadow-primary/15 ring-1">
+                  <div className="bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 aspect-15/8 relative rounded-2xl border border-primary/20 overflow-hidden">
+                    <GridMotion items={gridItems} gradientColor="rgba(28, 61, 118, 0.1)" className="h-full w-full" />
                   </div>
                 </div>
               </div>
@@ -387,7 +387,7 @@ export default function SoftwareDevelopmentWebsite() {
               <section className="bg-background pb-16 pt-16 md:pb-32">
                 <div className="group relative m-auto max-w-5xl px-6">
                   <div className="absolute inset-0 z-10 flex scale-95 items-center justify-center opacity-0 duration-500 group-hover:scale-100 group-hover:opacity-100">
-                    <a href="#contact" className="block text-sm duration-150 hover:opacity-75 text-orange-500">
+                    <a href="#contact" className="block text-sm duration-150 hover:opacity-75 text-primary">
                       <span>Ready to Start Your Project?</span>
                       <ChevronRight className="ml-1 inline-block size-3" />
                     </a>
@@ -476,18 +476,18 @@ export default function SoftwareDevelopmentWebsite() {
           <div className="@container mx-auto max-w-5xl px-6">
             <div className="text-center">
               <h2 className="text-balance text-4xl font-semibold lg:text-5xl">
-                Why Choose <span className="text-orange-500">DevSolutions</span>
+                Why Choose <span className="text-primary">DevSolutions</span>
               </h2>
               <p className="mt-4 text-muted-foreground">
                 We deliver high-quality software solutions that help your business grow and succeed in the digital
                 world.
               </p>
             </div>
-            <Card className="@min-4xl:max-w-full @min-4xl:grid-cols-3 @min-4xl:divide-x @min-4xl:divide-y-0 mx-auto mt-8 grid max-w-sm divide-y overflow-hidden shadow-zinc-950/5 border-orange-200 *:text-center md:mt-16">
+            <Card className="@min-4xl:max-w-full @min-4xl:grid-cols-3 @min-4xl:divide-x @min-4xl:divide-y-0 mx-auto mt-8 grid max-w-sm divide-y overflow-hidden shadow-zinc-950/5 border-primary/20 *:text-center md:mt-16">
               <div className="group shadow-zinc-950/5">
                 <CardHeader className="pb-3">
                   <CardDecorator>
-                    <Zap className="size-6 text-orange-500" aria-hidden />
+                    <Zap className="size-6 text-primary" aria-hidden />
                   </CardDecorator>
 
                   <h3 className="mt-6 font-medium">Fast Development</h3>
@@ -503,7 +503,7 @@ export default function SoftwareDevelopmentWebsite() {
               <div className="group shadow-zinc-950/5">
                 <CardHeader className="pb-3">
                   <CardDecorator>
-                    <Settings2 className="size-6 text-orange-500" aria-hidden />
+                    <Settings2 className="size-6 text-primary" aria-hidden />
                   </CardDecorator>
 
                   <h3 className="mt-6 font-medium">Scalable Solutions</h3>
@@ -519,7 +519,7 @@ export default function SoftwareDevelopmentWebsite() {
               <div className="group shadow-zinc-950/5">
                 <CardHeader className="pb-3">
                   <CardDecorator>
-                    <Sparkles className="size-6 text-orange-500" aria-hidden />
+                    <Sparkles className="size-6 text-primary" aria-hidden />
                   </CardDecorator>
 
                   <h3 className="mt-6 font-medium">Modern Technology</h3>
@@ -536,7 +536,7 @@ export default function SoftwareDevelopmentWebsite() {
         </section>
       </main>
 
-      <footer className="bg-background border-t border-orange-200">
+      <footer className="bg-background border-t border-primary/20">
         <div className="mx-auto max-w-7xl py-16 px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {/* Company Info */}
@@ -547,7 +547,7 @@ export default function SoftwareDevelopmentWebsite() {
                 your success.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       fillRule="evenodd"
@@ -556,12 +556,12 @@ export default function SoftwareDevelopmentWebsite() {
                     />
                   </svg>
                 </a>
-                <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </a>
-                <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                   <svg className="h-5 w-5 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
@@ -579,27 +579,27 @@ export default function SoftwareDevelopmentWebsite() {
               <h3 className="text-sm font-semibold text-foreground">Services</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                     Web Development
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                     Mobile Apps
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                     Custom Software
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                     API Development
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                     Cloud Solutions
                   </a>
                 </li>
@@ -611,27 +611,27 @@ export default function SoftwareDevelopmentWebsite() {
               <h3 className="text-sm font-semibold text-foreground">Company</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                     About Us
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                     Our Team
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                     Careers
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                     Case Studies
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                     Blog
                   </a>
                 </li>
@@ -690,17 +690,17 @@ export default function SoftwareDevelopmentWebsite() {
           </div>
 
           {/* Bottom section */}
-          <div className="mt-12 pt-8 border-t border-orange-200">
+          <div className="mt-12 pt-8 border-t border-primary/20">
             <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
               <div className="text-sm text-muted-foreground">© 2024 DevSolutions. All rights reserved.</div>
               <div className="flex flex-wrap justify-center sm:justify-end gap-x-6 gap-y-2 text-sm">
-                <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                   Privacy Policy
                 </a>
-                <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                   Terms of Service
                 </a>
-                <a href="#" className="text-muted-foreground hover:text-orange-500 transition-colors">
+                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                   Cookie Policy
                 </a>
               </div>

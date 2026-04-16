@@ -3,7 +3,8 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-import { ArrowRight, ChevronRight, Menu, X, Code, Zap, Settings2, Sparkles } from "lucide-react"
+import { ArrowRight, ChevronRight, Menu, X, Zap, Settings2, Sparkles } from "lucide-react"
+import Image from "next/image"
 import { motion, type Variants } from "framer-motion"
 import { GridMotion } from "./ui/grid-motion"
 
@@ -39,7 +40,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
@@ -205,21 +206,6 @@ const HeroHeader = () => {
                   ))}
                 </ul>
               </div>
-              <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                <Button variant="outline" size="sm" className={cn(isScrolled && "lg:hidden")}>
-                  <span>Login</span>
-                </Button>
-                <Button
-                  size="sm"
-                  className={cn(
-                    isScrolled
-                      ? "lg:inline-flex bg-primary hover:bg-primary/90"
-                      : "hidden bg-primary hover:bg-primary/90",
-                  )}
-                >
-                  <span>Get Started</span>
-                </Button>
-              </div>
             </div>
           </div>
         </div>
@@ -230,11 +216,15 @@ const HeroHeader = () => {
 
 const Logo = ({ className }: { className?: string }) => {
   return (
-    <div className={cn("flex items-center space-x-2", className)}>
-      <div className="bg-primary rounded-lg p-2">
-        <Code className="h-6 w-6 text-primary-foreground" />
-      </div>
-      <span className="text-xl font-bold">Ekole</span>
+    <div className={cn("flex items-center", className)}>
+      <Image
+        src="/logo.png"
+        alt="Ekole Logo"
+        width={120}
+        height={40}
+        className="h-10 w-auto object-contain"
+        priority
+      />
     </div>
   )
 }
@@ -384,90 +374,6 @@ export default function SoftwareDevelopmentWebsite() {
                 </div>
               </div>
 
-              <section className="bg-background pb-16 pt-16 md:pb-32">
-                <div className="group relative m-auto max-w-5xl px-6">
-                  <div className="absolute inset-0 z-10 flex scale-95 items-center justify-center opacity-0 duration-500 group-hover:scale-100 group-hover:opacity-100">
-                    <a href="#contact" className="block text-sm duration-150 hover:opacity-75 text-primary">
-                      <span>Ready to Start Your Project?</span>
-                      <ChevronRight className="ml-1 inline-block size-3" />
-                    </a>
-                  </div>
-                  <div className="group-hover:blur-xs mx-auto mt-12 grid max-w-2xl grid-cols-4 gap-x-12 gap-y-8 transition-all duration-500 group-hover:opacity-50 sm:gap-x-16 sm:gap-y-14">
-                    <div className="flex">
-                      <img
-                        className="mx-auto h-5 w-fit dark:invert opacity-60"
-                        src="https://html.tailus.io/blocks/customers/nvidia.svg"
-                        alt="Client Logo"
-                        height="20"
-                        width="auto"
-                      />
-                    </div>
-                    <div className="flex">
-                      <img
-                        className="mx-auto h-4 w-fit dark:invert opacity-60"
-                        src="https://html.tailus.io/blocks/customers/column.svg"
-                        alt="Client Logo"
-                        height="16"
-                        width="auto"
-                      />
-                    </div>
-                    <div className="flex">
-                      <img
-                        className="mx-auto h-4 w-fit dark:invert opacity-60"
-                        src="https://html.tailus.io/blocks/customers/github.svg"
-                        alt="Client Logo"
-                        height="16"
-                        width="auto"
-                      />
-                    </div>
-                    <div className="flex">
-                      <img
-                        className="mx-auto h-5 w-fit dark:invert opacity-60"
-                        src="https://html.tailus.io/blocks/customers/nike.svg"
-                        alt="Client Logo"
-                        height="20"
-                        width="auto"
-                      />
-                    </div>
-                    <div className="flex">
-                      <img
-                        className="mx-auto h-5 w-fit dark:invert opacity-60"
-                        src="https://html.tailus.io/blocks/customers/lemonsqueezy.svg"
-                        alt="Client Logo"
-                        height="20"
-                        width="auto"
-                      />
-                    </div>
-                    <div className="flex">
-                      <img
-                        className="mx-auto h-4 w-fit dark:invert opacity-60"
-                        src="https://html.tailus.io/blocks/customers/laravel.svg"
-                        alt="Client Logo"
-                        height="16"
-                        width="auto"
-                      />
-                    </div>
-                    <div className="flex">
-                      <img
-                        className="mx-auto h-7 w-fit dark:invert opacity-60"
-                        src="https://html.tailus.io/blocks/customers/lilly.svg"
-                        alt="Client Logo"
-                        height="28"
-                        width="auto"
-                      />
-                    </div>
-                    <div className="flex">
-                      <img
-                        className="mx-auto h-6 w-fit dark:invert opacity-60"
-                        src="https://html.tailus.io/blocks/customers/openai.svg"
-                        alt="Client Logo"
-                        height="24"
-                        width="auto"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </section>
             </AnimatedGroup>
           </div>
         </section>
@@ -692,16 +598,13 @@ export default function SoftwareDevelopmentWebsite() {
           {/* Bottom section */}
           <div className="mt-12 pt-8 border-t border-primary/20">
             <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-              <div className="text-sm text-muted-foreground">© 2024 DevSolutions. All rights reserved.</div>
+              <div className="text-sm text-muted-foreground">Copyright © 2026 Whipple Studio.</div>
               <div className="flex flex-wrap justify-center sm:justify-end gap-x-6 gap-y-2 text-sm">
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Privacy Policy
+                <a href="https://www.ekole.app/privacy-and-policy" className="text-muted-foreground hover:text-primary transition-colors">
+                  Política de Privacidad
                 </a>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Terms of Service
-                </a>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Cookie Policy
+                <a href="https://www.ekole.app/terms-and-conditions" className="text-muted-foreground hover:text-primary transition-colors">
+                  Terminos y condiciones
                 </a>
               </div>
             </div>

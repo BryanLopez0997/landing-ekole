@@ -12,6 +12,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+        display: ['var(--font-display)', 'ui-serif', 'Georgia', 'serif'],
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -42,6 +47,16 @@ const config: Config = {
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
+        },
+        safe: {
+          DEFAULT: 'hsl(var(--safe))',
+          foreground: 'hsl(var(--safe-foreground))',
+          soft: 'hsl(var(--safe-soft))',
+        },
+        risk: {
+          DEFAULT: 'hsl(var(--risk))',
+          foreground: 'hsl(var(--risk-foreground))',
+          soft: 'hsl(var(--risk-soft))',
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

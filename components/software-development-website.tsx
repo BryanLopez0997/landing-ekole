@@ -46,7 +46,7 @@ const itemRise: Variants = {
   },
 }
 
-function Reveal({
+export function Reveal({
   children,
   className,
   delay = 0,
@@ -94,13 +94,13 @@ const Logo = ({ className }: { className?: string }) => (
 /* ---------- navbar ---------- */
 
 const menuItems = [
-  { name: "Problema", href: "#problema" },
-  { name: "Diagnóstico", href: "#diagnostico" },
-  { name: "Solución", href: "#solucion" },
-  { name: "Preguntas", href: "#preguntas" },
+  { name: "Problema", href: "/#problema" },
+  { name: "Diagnóstico", href: "/diagnostico" },
+  { name: "Solución", href: "/#solucion" },
+  { name: "Preguntas", href: "/#preguntas" },
 ]
 
-function HeroHeader() {
+export function HeroHeader() {
   const [open, setOpen] = React.useState(false)
   const [scrolled, setScrolled] = React.useState(false)
 
@@ -121,7 +121,7 @@ function HeroHeader() {
             scrolled && "border-border/70 bg-background/80 shadow-[0_1px_0_0_hsl(var(--border))] backdrop-blur-xl",
           )}
         >
-          <a href="#top" aria-label="Ekole inicio" className="flex items-center">
+          <a href="/" aria-label="Ekole inicio" className="flex items-center">
             <Logo />
           </a>
 
@@ -140,7 +140,7 @@ function HeroHeader() {
 
           <div className="flex items-center gap-2">
             <a
-              href="#cta"
+              href="/#cta"
               className="hidden items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md lg:inline-flex"
             >
               Ver cómo funciona
@@ -173,7 +173,7 @@ function HeroHeader() {
               ))}
               <li>
                 <a
-                  href="#cta"
+                  href="/#cta"
                   onClick={() => setOpen(false)}
                   className="mt-1 block rounded-lg bg-primary px-3 py-2 text-center font-medium text-primary-foreground"
                 >
@@ -190,7 +190,7 @@ function HeroHeader() {
 
 /* ---------- small ui primitives ---------- */
 
-function Pill({
+export function Pill({
   children,
   tone = "default",
 }: {
@@ -215,7 +215,7 @@ function Pill({
   )
 }
 
-function PrimaryCTA({
+export function PrimaryCTA({
   children,
   href = "#cta",
   className,
@@ -238,7 +238,7 @@ function PrimaryCTA({
   )
 }
 
-function GhostCTA({
+export function GhostCTA({
   children,
   href = "#diagnostico",
   className,
@@ -260,7 +260,7 @@ function GhostCTA({
   )
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+export function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-center justify-center gap-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
       <span className="h-px w-8 bg-border" />
@@ -325,7 +325,7 @@ function Hero() {
             className="mt-10 flex flex-col items-center gap-3 md:flex-row"
           >
             <PrimaryCTA href="#cta">Ver cómo funciona con mi colegio</PrimaryCTA>
-            <GhostCTA href="#diagnostico">
+            <GhostCTA href="/diagnostico">
               ¿Qué tan expuesta está mi salida hoy? — Test de 3 min
             </GhostCTA>
           </motion.div>
@@ -519,7 +519,7 @@ function Escenarios() {
             <p className="text-base text-muted-foreground md:text-lg">
               ¿Cuánto más tiempo puede seguir operando sin esto?
             </p>
-            <PrimaryCTA href="#diagnostico">Evaluar mi exposición ahora — 3 min, gratis</PrimaryCTA>
+            <PrimaryCTA href="/diagnostico">Evaluar mi exposición ahora — 3 min, gratis</PrimaryCTA>
           </div>
         </Reveal>
       </div>
@@ -692,7 +692,7 @@ function Diagnostico() {
                 Al terminar recibe su <strong className="text-foreground">Guía de Protección Legal</strong>{" "}
                 con los pasos concretos para blindar su posición.
               </p>
-              <PrimaryCTA href="#cta">Evaluar mi exposición ahora</PrimaryCTA>
+              <PrimaryCTA href="/diagnostico">Evaluar mi exposición ahora</PrimaryCTA>
             </div>
 
             <div className="mt-6 flex items-start gap-2 text-xs text-muted-foreground">
@@ -1109,7 +1109,7 @@ function CTAFinal() {
    FOOTER
    ============================================================== */
 
-function Footer() {
+export function Footer() {
   return (
     <footer className="border-t border-border bg-muted/30">
       <div className="mx-auto max-w-6xl px-6 py-16 lg:py-20">
@@ -1127,22 +1127,22 @@ function Footer() {
             <h3 className="text-sm font-semibold text-foreground">Producto</h3>
             <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
               <li>
-                <a href="#problema" className="transition-colors hover:text-foreground">
+                <a href="/#problema" className="transition-colors hover:text-foreground">
                   Problema
                 </a>
               </li>
               <li>
-                <a href="#diagnostico" className="transition-colors hover:text-foreground">
+                <a href="/diagnostico" className="transition-colors hover:text-foreground">
                   Diagnóstico
                 </a>
               </li>
               <li>
-                <a href="#solucion" className="transition-colors hover:text-foreground">
+                <a href="/#solucion" className="transition-colors hover:text-foreground">
                   Solución
                 </a>
               </li>
               <li>
-                <a href="#preguntas" className="transition-colors hover:text-foreground">
+                <a href="/#preguntas" className="transition-colors hover:text-foreground">
                   Preguntas
                 </a>
               </li>
@@ -1153,7 +1153,7 @@ function Footer() {
             <h3 className="text-sm font-semibold text-foreground">Contacto</h3>
             <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
               <li>
-                <a href="#cta" className="transition-colors hover:text-foreground">
+                <a href="/#cta" className="transition-colors hover:text-foreground">
                   Solicitar demo
                 </a>
               </li>

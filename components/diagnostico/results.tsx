@@ -54,9 +54,17 @@ export function RiskVerdict({
         <SectionLabel>Resultado del diagnóstico</SectionLabel>
 
         <Reveal delay={0.1}>
-          <p className="mt-6 text-sm text-muted-foreground">Nivel de exposición legal</p>
-          <h2 className={cn("mt-3 font-display text-6xl font-normal leading-none md:text-7xl", color)}>
-            <em className="italic">{nivel}</em>
+          <p className="mt-6 text-sm font-medium uppercase tracking-[0.15em] text-muted-foreground">
+            Nivel de exposición legal
+          </p>
+          {/* DS: sin itálica; peso + color comunican la carga */}
+          <h2
+            className={cn(
+              "mt-3 text-6xl font-extrabold leading-none tracking-tight md:text-7xl",
+              color,
+            )}
+          >
+            {nivel}
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-balance text-base leading-relaxed text-foreground/80 md:text-lg">
             {tagline}
@@ -439,7 +447,8 @@ export function VisionCard() {
       <div className="mx-auto max-w-3xl px-6">
         <Reveal>
           <SectionLabel>Colegios con cumplimiento cerrado</SectionLabel>
-          <h2 className="mt-5 text-balance text-center text-2xl font-medium leading-tight tracking-tight text-foreground md:text-3xl">
+          {/* DS: "Ekole promete" → navy; acento sky sobre texto navy */}
+          <h2 className="mt-5 text-balance text-center text-2xl font-extrabold leading-tight tracking-tight text-primary md:text-3xl">
             Así opera un colegio que <span className="text-safe">ya cerró</span> estas brechas
           </h2>
         </Reveal>
@@ -486,10 +495,11 @@ export function ReputationCard() {
       <div className="mx-auto max-w-3xl px-6">
         <Reveal>
           <SectionLabel>El riesgo que no aparece en ningún expediente</SectionLabel>
-          <h2 className="mt-6 text-balance text-center font-display text-4xl font-normal leading-[1.15] text-foreground md:text-5xl">
+          {/* DS: info habla → gray-900; énfasis con color (text-risk), sin itálica */}
+          <h2 className="mt-6 text-balance text-center text-4xl font-extrabold leading-[1.12] tracking-tight text-foreground md:text-5xl">
             La multa se paga una vez.
             <br />
-            <em className="italic text-risk">La reputación no se recupera.</em>
+            <span className="text-risk">La reputación no se recupera.</span>
           </h2>
         </Reveal>
 

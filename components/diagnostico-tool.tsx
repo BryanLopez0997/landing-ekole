@@ -162,9 +162,9 @@ export default function DiagnosticoTool() {
                 onClick={calcular}
                 disabled={!allAnswered}
                 className={cn(
-                  "group inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-semibold transition-all",
+                  "group inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2",
                   allAnswered
-                    ? "bg-primary text-primary-foreground shadow-md shadow-primary/20 ring-1 ring-primary/30 hover:bg-primary/92 hover:shadow-lg hover:shadow-primary/30"
+                    ? "bg-primary text-primary-foreground shadow-md shadow-primary/20 ring-1 ring-primary/30 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/35 active:translate-y-px active:shadow-sm"
                     : "cursor-not-allowed bg-muted text-muted-foreground",
                 )}
               >
@@ -252,7 +252,7 @@ export default function DiagnosticoTool() {
             <button
               type="button"
               onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
-              className="group inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-150 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-md active:translate-y-px active:shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2"
             >
               Recibir guía
               <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />

@@ -22,6 +22,16 @@ import {
   X,
   Zap,
 } from "lucide-react"
+import { EfectoEkoleChart } from "./efecto-ekole-chart"
+
+/* ==============================================================
+   TODO: reemplazar por el link real de agenda cuando exista.
+   Opciones futuras: Calendly (https://calendly.com/...), WhatsApp
+   (https://wa.me/52...?text=...) o página /demo con formulario.
+   Hoy apunta a /diagnostico como fallback para no dejar botones
+   muertos (href="#") ni bucles de scroll.
+   ============================================================== */
+const DEMO_CTA_HREF = "/diagnostico"
 
 /* ---------- utilities ---------- */
 
@@ -94,9 +104,9 @@ const Logo = ({ className }: { className?: string }) => (
 /* ---------- navbar ---------- */
 
 const menuItems = [
-  { name: "Problema", href: "/#problema" },
-  { name: "Diagnóstico", href: "/diagnostico" },
-  { name: "Solución", href: "/#solucion" },
+  { name: "Por qué importa", href: "/#problema" },
+  { name: "El efecto", href: "/#efecto" },
+  { name: "La solución", href: "/#solucion" },
   { name: "Preguntas", href: "/#preguntas" },
 ]
 
@@ -140,8 +150,8 @@ export function HeroHeader() {
 
           <div className="flex items-center gap-2">
             <a
-              href="/#cta"
-              className="hidden items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md lg:inline-flex"
+              href={DEMO_CTA_HREF}
+              className="hidden items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-150 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-md active:translate-y-px active:shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 lg:inline-flex"
             >
               Ver cómo funciona
               <ArrowRight className="size-3.5" />
@@ -228,7 +238,8 @@ export function PrimaryCTA({
     <a
       href={href}
       className={cn(
-        "group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-md shadow-primary/20 ring-1 ring-primary/30 transition-all hover:bg-primary/92 hover:shadow-lg hover:shadow-primary/30 md:text-base",
+        // DS: hover → bg más oscuro (primary-dark) + shadow-lg; active → translate-y-px + shadow off; focus-visible → ring sky 3px
+        "group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 ring-1 ring-primary/30 transition-all duration-150 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/35 active:translate-y-px active:shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 md:text-base",
         className,
       )}
     >
@@ -251,7 +262,8 @@ export function GhostCTA({
     <a
       href={href}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background/60 px-6 py-3 text-sm font-medium text-foreground/90 transition-all hover:border-primary/40 hover:bg-background hover:text-primary md:text-base",
+        // DS ghost: hover → bg primary/8 + border primary/50 + text primary; active → bg primary/14; focus-visible sky
+        "inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background/60 px-6 py-3 text-sm font-medium text-foreground/90 transition-all duration-150 hover:-translate-y-[1px] hover:border-primary/60 hover:bg-primary/[0.06] hover:text-primary hover:shadow-sm active:translate-y-px active:bg-primary/[0.12] active:shadow-none focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 md:text-base",
         className,
       )}
     >
@@ -266,6 +278,40 @@ export function SectionLabel({ children }: { children: React.ReactNode }) {
       <span className="h-px w-8 bg-border" />
       {children}
       <span className="h-px w-8 bg-border" />
+    </div>
+  )
+}
+
+/* ----------------------------------------------------------------
+   LegalCredential — design system component
+   Shield + text, usado SOLO para referencias a leyes/normas oficiales.
+   No es un badge/pill; comunica autoridad institucional.
+   ---------------------------------------------------------------- */
+
+export function LegalCredentials({
+  items,
+  tone = "light",
+  className,
+}: {
+  items: string[]
+  tone?: "light" | "navy"
+  className?: string
+}) {
+  const textCls = tone === "navy" ? "text-white/95" : "text-primary"
+  const iconCls = tone === "navy" ? "text-sky" : "text-primary"
+  const sepCls =
+    tone === "navy" ? "bg-white/20" : "bg-primary/20"
+  return (
+    <div className={cn("flex flex-wrap items-center gap-x-3 gap-y-2", className)}>
+      {items.map((label, i) => (
+        <React.Fragment key={label}>
+          {i > 0 && <span className={cn("h-3.5 w-px", sepCls)} aria-hidden />}
+          <span className={cn("inline-flex items-center gap-1.5 text-sm font-semibold leading-none", textCls)}>
+            <ShieldCheck className={cn("size-4", iconCls)} strokeWidth={2.25} />
+            <span>{label}</span>
+          </span>
+        </React.Fragment>
+      ))}
     </div>
   )
 }
@@ -298,7 +344,7 @@ function Hero() {
                 <span className="absolute inline-flex size-2 animate-pulse-dot rounded-full bg-safe/60" />
                 <span className="relative inline-flex size-1.5 rounded-full bg-safe" />
               </span>
-              Software de salida escolar · Cupos ciclo 2026-2027
+              Cupos limitados para el ciclo 2026-2027
             </Pill>
           </motion.div>
 
@@ -320,11 +366,32 @@ function Hero() {
             cada salida automáticamente — sin que un solo padre descargue nada.
           </motion.p>
 
+          {/* Dashboard preview */}
+          <motion.div
+            variants={itemRise}
+            className="relative mt-12 w-full max-w-5xl"
+          >
+            <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl shadow-primary/10 ring-1 ring-black/[0.04] md:rounded-3xl">
+              <Image
+                src="/promotions/Macbook Dashboard 1.png"
+                alt="Dashboard Ekole en MacBook: visibilidad total de cada salida en tiempo real"
+                width={2400}
+                height={1500}
+                priority
+                className="h-auto w-full"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1024px"
+              />
+            </div>
+            <p className="mt-4 text-center text-xs italic text-muted-foreground md:text-sm">
+              Dashboard Ekole: visibilidad total de cada salida en tiempo real.
+            </p>
+          </motion.div>
+
           <motion.div
             variants={itemRise}
             className="mt-10 flex flex-col items-center gap-3 md:flex-row"
           >
-            <PrimaryCTA href="#cta">Ver cómo funciona con mi colegio</PrimaryCTA>
+            <PrimaryCTA href={DEMO_CTA_HREF}>Ver cómo funciona con mi colegio</PrimaryCTA>
             <GhostCTA href="/diagnostico">
               ¿Qué tan expuesta está mi salida hoy? — Test de 3 min
             </GhostCTA>
@@ -341,7 +408,7 @@ function Hero() {
             {[
               { icon: Clock, kpi: "<24 h", label: "Activación completa" },
               { icon: Smile, kpi: "0 apps", label: "Para padres" },
-              { icon: ShieldCheck, kpi: "78 %", label: "Menos tiempo de salida" },
+              { icon: ShieldCheck, kpi: "Evidencia", label: "Ante reclamos" },
               { icon: Scale, kpi: "LFPDPPP", label: "Cumplimiento total" },
             ].map(({ icon: Icon, kpi, label }) => (
               <div
@@ -367,28 +434,10 @@ function Hero() {
    ============================================================== */
 
 function Problema() {
-  const costos = [
-    {
-      icon: FileText,
-      title: "Si mañana pasa algo, usted no puede probar nada",
-      body: "Si ocurre un incidente, ¿su colegio puede demostrar quién recogió al alumno, a qué hora y con qué autorización? Sin ese registro, la carga de la prueba recae en usted — personalmente.",
-    },
-    {
-      icon: Frown,
-      title: "Los padres no se quejan. Se van.",
-      body: "La frustración de esperar en filas, no saber si ya llamaron al niño y depender del altavoz no genera quejas formales. Genera cambios de colegio. La puerta es la primera y última impresión del día — y se repite 180 veces al año.",
-    },
-    {
-      icon: Clock,
-      title: "Su personal opera el proceso más sensible con las herramientas más frágiles",
-      body: "Listas en WhatsApp, nombres gritados, caras memorizadas. Su equipo administra la seguridad de cada alumno con herramientas que no aceptaría para ninguna otra área del colegio. Y cuando un padre pregunta \"¿a qué hora salió mi hijo?\", la única respuesta es: \"déjeme revisar\".",
-    },
-  ]
-
   return (
-    <section id="problema" className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <Reveal className="mx-auto max-w-3xl text-center">
+    <section id="problema" className="relative py-24 md:py-28">
+      <div className="mx-auto max-w-4xl px-6">
+        <Reveal className="text-center">
           <SectionLabel>El problema real</SectionLabel>
           <h2 className="mt-6 text-balance text-4xl font-semibold tracking-tight md:text-5xl">
             El problema no es que la salida sea lenta.{" "}
@@ -401,32 +450,8 @@ function Problema() {
             Y funciona... hasta que un padre reclama, un tutor no autorizado se presenta o alguien pregunta
             <em className="font-display italic"> "¿quién recogió a este niño y a qué hora?"</em>
           </p>
-          <p className="mt-4 text-sm font-medium text-foreground">
+          <p className="mx-auto mt-6 inline-block rounded-full border border-border bg-card px-5 py-2 text-sm font-semibold text-foreground shadow-sm">
             Lo que no existe documentado, no existe legalmente.
-          </p>
-        </Reveal>
-
-        <div className="mt-16 grid gap-5 md:grid-cols-3">
-          {costos.map((c, i) => (
-            <Reveal key={c.title} delay={i * 0.08}>
-              <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-7 shadow-sm transition-all hover:-translate-y-0.5 hover:border-risk/30 hover:shadow-md">
-                <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-risk/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                <div className="flex size-10 items-center justify-center rounded-lg bg-risk-soft text-risk">
-                  <c.icon className="size-5" />
-                </div>
-                <h3 className="mt-5 text-lg font-semibold text-foreground">{c.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.body}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal delay={0.3}>
-          <p className="mx-auto mt-12 max-w-2xl text-center text-base italic text-muted-foreground md:text-lg">
-            Y lo más costoso no es el tiempo: es que el día que todo salga mal,
-            <span className="font-display italic text-foreground">
-              {" "}no tendrá cómo defenderse.
-            </span>
           </p>
         </Reveal>
       </div>
@@ -515,7 +540,20 @@ function Escenarios() {
         </div>
 
         <Reveal delay={0.3}>
-          <div className="mt-16 flex flex-col items-center gap-4 text-center">
+          <div className="mx-auto mt-16 max-w-3xl rounded-3xl border border-border bg-card/60 p-8 text-center shadow-sm md:p-10">
+            <p className="text-balance text-base leading-relaxed text-muted-foreground md:text-lg">
+              Y mientras usted no se da cuenta, las familias sí lo notan. La frustración de esperar en filas,
+              no saber si ya llamaron al niño y depender del altavoz no genera quejas formales. Genera cambios
+              de colegio. La puerta es la primera y última impresión del día — y se repite 180 veces al año.
+            </p>
+            <p className="mt-5 text-balance font-display text-2xl italic leading-tight text-foreground md:text-3xl">
+              Los padres no se quejan. Se van.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.4}>
+          <div className="mt-12 flex flex-col items-center gap-4 text-center">
             <p className="text-base text-muted-foreground md:text-lg">
               ¿Cuánto más tiempo puede seguir operando sin esto?
             </p>
@@ -579,7 +617,8 @@ function FalsoDilema() {
         </Reveal>
 
         <Reveal delay={0.15}>
-          <div className="mx-auto mt-14 max-w-4xl overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+          {/* Desktop: tabla 3 col */}
+          <div className="mx-auto mt-14 hidden max-w-4xl overflow-hidden rounded-2xl border border-border bg-card shadow-sm md:block">
             <div className="grid grid-cols-3 border-b border-border bg-muted/60 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               <div className="px-5 py-4">Dimensión</div>
               <div className="border-l border-border px-5 py-4 text-risk">Sin documentación</div>
@@ -611,12 +650,106 @@ function FalsoDilema() {
               </div>
             </div>
           </div>
+
+          {/* Mobile: cards apiladas */}
+          <div className="mt-10 flex flex-col gap-4 md:hidden">
+            {rows.map((r) => (
+              <div
+                key={r.label}
+                className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
+              >
+                <div className="flex items-center gap-2 border-b border-border bg-muted/60 px-5 py-3">
+                  <r.icon className="size-4 text-muted-foreground" />
+                  <p className="text-base font-semibold text-foreground">{r.label}</p>
+                </div>
+                <div className="divide-y divide-border">
+                  <div className="flex items-start justify-between gap-4 px-5 py-3.5">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-risk">
+                      Sin doc.
+                    </span>
+                    <span className="text-right text-sm text-muted-foreground">{r.sin}</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4 px-5 py-3.5">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-risk">
+                      Manual
+                    </span>
+                    <span className="text-right text-sm text-muted-foreground">{r.manual}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+            <div className="rounded-2xl border border-risk/30 bg-risk-soft/40 p-5 text-sm font-medium">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Resultado
+              </p>
+              <div className="space-y-2 text-risk">
+                <p>
+                  <span className="font-semibold">Sin doc:</span> elige velocidad. Pierde protección.
+                </p>
+                <p>
+                  <span className="font-semibold">Manual:</span> elige protección. Pierde familias.
+                </p>
+              </div>
+            </div>
+          </div>
         </Reveal>
 
         <Reveal delay={0.3}>
           <p className="mx-auto mt-12 max-w-2xl text-center font-display text-2xl italic text-foreground md:text-3xl">
             ¿Y si no tuviera que elegir?
           </p>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+/* ==============================================================
+   EFECTO EKOLE — gráfica de campana
+   ============================================================== */
+
+function EfectoEkole() {
+  return (
+    <section id="efecto" className="relative overflow-hidden py-24 md:py-32">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-1/2 top-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,hsl(var(--safe)/0.10),transparent_70%)] blur-3xl" />
+      </div>
+
+      <div className="mx-auto max-w-6xl px-6">
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <SectionLabel>El efecto Ekole</SectionLabel>
+          <h2 className="mt-6 text-balance text-3xl font-semibold tracking-tight md:text-5xl">
+            Llegan los mismos padres. La diferencia es{" "}
+            <span className="font-display italic font-normal text-primary">
+              cuánto tiempo se quedan después de la campana.
+            </span>
+          </h2>
+          <p className="mt-6 text-balance text-muted-foreground md:text-lg">
+            En un colegio de 300 alumnos, la diferencia entre 30 minutos y 5 no es comodidad — son 25 minutos
+            menos de autos acumulados en la calle, 25 minutos menos de personal ocupado, y 25 minutos menos
+            de exposición en el momento más vulnerable del día.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.15}>
+          <div className="mt-14">
+            <EfectoEkoleChart />
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.3}>
+          <div className="mx-auto mt-12 max-w-2xl text-center">
+            <p className="text-balance text-base leading-relaxed text-foreground/80 md:text-lg">
+              Sin Ekole, su fila dura 30 minutos después de la hora de salida.{" "}
+              <strong className="font-semibold text-foreground">Con Ekole, 5.</strong>
+            </p>
+            <p className="mt-2 text-sm text-muted-foreground md:text-base">
+              Mismo colegio. Mismo número de padres. Diferente sistema.
+            </p>
+            <p className="mt-6 text-sm italic text-muted-foreground">
+              ¿Cómo lo logra? Con un sistema que su equipo aprende en 15 minutos.
+            </p>
+          </div>
         </Reveal>
       </div>
     </section>
@@ -645,14 +778,15 @@ function Diagnostico() {
         <Reveal className="mx-auto max-w-3xl text-center">
           <SectionLabel>Diagnóstico gratuito · 3 minutos</SectionLabel>
           <h2 className="mt-6 text-balance text-3xl font-semibold tracking-tight md:text-5xl">
-            Antes de decidir nada,{" "}
+            ¿Todavía no está listo para una demo?{" "}
             <span className="font-display italic font-normal text-primary">
-              descubra exactamente dónde está expuesto.
+              Descubra primero dónde está expuesto.
             </span>
           </h2>
           <p className="mt-6 text-balance text-muted-foreground md:text-lg">
-            Le dice qué tan expuesto está usted personalmente bajo el marco legal mexicano. Al terminar, usted
-            decide si quiere ver una demo — o usar los resultados por su cuenta.
+            Tres minutos. Sin compromiso. Le dice qué tan expuesto está usted personalmente bajo el marco
+            legal mexicano. Al terminar, usted decide si quiere ver una demo — o usar los resultados por su
+            cuenta.
           </p>
         </Reveal>
 
@@ -785,9 +919,129 @@ function Solucion() {
           </div>
         </Reveal>
 
-        {/* comparison table: 3 cols */}
+        {/* 3-step visual walkthrough */}
+        <div className="mt-20">
+          <Reveal>
+            <div className="mx-auto max-w-3xl text-center">
+              <SectionLabel>Así funciona en la práctica</SectionLabel>
+              <p className="mt-4 text-balance text-xl font-medium text-foreground md:text-2xl">
+                De la clave al registro{" "}
+                <span className="font-display italic font-normal text-primary">en segundos.</span>
+              </p>
+            </div>
+          </Reveal>
+
+          {/* Wrapper que se estira más allá del max-w-6xl en lg+ para dar tamaño real a los iPads */}
+          <div className="mt-12 md:mx-auto md:max-w-none lg:-mx-4 xl:-mx-8 2xl:-mx-16">
+          <div className="grid gap-10 md:grid-cols-3 md:gap-5 lg:gap-4">
+            {[
+              {
+                num: "①",
+                title: "El padre da su clave en la puerta o en la fila",
+                body: "El personal ingresa los 3 dígitos. El alumno aparece al instante.",
+                img: "/promotions/Buscador iphone 089.png",
+                alt: "iPad con buscador Ekole: clave ingresada y alumno identificado",
+                // Semántica: captura / autenticación → primary (navy)
+                accent: {
+                  bar: "bg-primary",
+                  tint: "from-primary/[0.06] via-background to-background",
+                  num: "text-primary",
+                  ring: "ring-primary/10",
+                },
+              },
+              {
+                num: "②",
+                title: "El maestro recibe y despacha desde su salón",
+                body: "El maestro ve al alumno autorizado en su tablero y lo envía a la puerta.",
+                img: "/promotions/Ipad dasboard final.png",
+                alt: "iPad con dashboard del maestro: alumno listo para enviar a puerta",
+                // Semántica: acción / en progreso → sky (intermedio, dinámico)
+                accent: {
+                  bar: "bg-sky",
+                  tint: "from-sky/[0.08] via-background to-background",
+                  num: "text-sky",
+                  ring: "ring-sky/15",
+                },
+              },
+              {
+                num: "③",
+                title: "La entrega queda documentada automáticamente",
+                body: "Nombre, hora, grado, confirmación. Su evidencia legal — sin trabajo adicional.",
+                img: "/promotions/Ipad Entregados.png",
+                alt: "iPad con pantalla de entregas confirmadas y registro de hora exacta",
+                // Semántica: éxito / completado → safe (verde, confirmación)
+                accent: {
+                  bar: "bg-safe",
+                  tint: "from-safe/[0.07] via-background to-background",
+                  num: "text-safe",
+                  ring: "ring-safe/15",
+                },
+              },
+            ].map((step, i) => (
+              <Reveal key={step.num} delay={0.1 + i * 0.08}>
+                <div className="flex h-full flex-col">
+                  {/* Image frame — aspecto unificado (todas iPads ya), object-contain, tint semántico */}
+                  <div
+                    className={cn(
+                      "relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded-2xl border border-border bg-gradient-to-br shadow-md ring-1 transition-all hover:shadow-lg md:aspect-[5/4] lg:aspect-[4/3]",
+                      step.accent.tint,
+                      step.accent.ring,
+                    )}
+                  >
+                    {/* Accent bar — refuerza narrativa de progresión */}
+                    <div
+                      aria-hidden
+                      className={cn(
+                        "absolute inset-x-0 top-0 h-1",
+                        step.accent.bar,
+                      )}
+                    />
+                    {/* Step badge flotante sobre la card */}
+                    <div
+                      aria-hidden
+                      className={cn(
+                        "absolute left-4 top-4 z-10 flex size-8 items-center justify-center rounded-full border border-border bg-background font-mono text-xs font-semibold shadow-sm md:left-5 md:top-5 md:size-9 md:text-sm",
+                        step.accent.num,
+                      )}
+                    >
+                      {i + 1}
+                    </div>
+
+                    <Image
+                      src={step.img}
+                      alt={step.alt}
+                      fill
+                      quality={95}
+                      className="object-contain object-center p-3 md:p-3 lg:p-2"
+                      sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 420px"
+                    />
+                  </div>
+
+                  {/* Copy */}
+                  <div className="mt-6 flex-1">
+                    <div className="flex items-start gap-3">
+                      <span className={cn("font-display text-3xl font-normal leading-none", step.accent.num)}>
+                        {step.num}
+                      </span>
+                      <div>
+                        <h4 className="text-base font-semibold leading-snug text-foreground md:text-lg">
+                          {step.title}
+                        </h4>
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          </div>
+        </div>
+
+        {/* comparison: table en desktop, cards apiladas en móvil */}
         <Reveal delay={0.25}>
-          <div className="mx-auto mt-16 max-w-5xl overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+          {/* Desktop: tabla clásica 4 col */}
+          <div className="mx-auto mt-16 hidden max-w-5xl overflow-hidden rounded-2xl border border-border bg-card shadow-sm md:block">
             <div className="grid grid-cols-4 border-b border-border bg-background text-xs font-semibold uppercase tracking-wider">
               <div className="px-5 py-4 text-muted-foreground">Dimensión</div>
               <div className="border-l border-border px-5 py-4 text-risk">Sin nada (hoy)</div>
@@ -812,11 +1066,49 @@ function Solucion() {
               </div>
             ))}
           </div>
+
+          {/* Mobile: cards apiladas — una por dimensión, 3 variantes adentro */}
+          <div className="mt-10 flex flex-col gap-4 md:hidden">
+            {compareRows.map((r) => (
+              <div
+                key={r.label}
+                className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
+              >
+                <div className="border-b border-border bg-background px-5 py-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    Dimensión
+                  </p>
+                  <p className="mt-0.5 text-base font-semibold text-foreground">{r.label}</p>
+                </div>
+                <div className="divide-y divide-border">
+                  <div className="flex items-start justify-between gap-4 px-5 py-3.5">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-risk">
+                      Sin nada
+                    </span>
+                    <span className="text-right text-sm text-muted-foreground">{r.sinNada}</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4 px-5 py-3.5">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-risk">
+                      Manual
+                    </span>
+                    <span className="text-right text-sm text-muted-foreground">{r.manual}</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4 bg-safe-soft/50 px-5 py-3.5">
+                    <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-safe">
+                      <Check className="size-3.5" />
+                      Con Ekole
+                    </span>
+                    <span className="text-right text-sm font-semibold text-foreground">{r.ekole}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </Reveal>
 
         <Reveal delay={0.35}>
           <div className="mt-10 flex flex-col items-center gap-3">
-            <PrimaryCTA href="#cta">Ver cómo funciona con mi colegio</PrimaryCTA>
+            <PrimaryCTA href={DEMO_CTA_HREF}>Ver cómo funciona con mi colegio</PrimaryCTA>
             <p className="text-xs text-muted-foreground">
               20 min · Sin compromiso · Cupos limitados para ciclo 2026-2027
             </p>
@@ -922,7 +1214,7 @@ function ComoFunciona() {
 
         <Reveal delay={0.3}>
           <div className="mt-12 flex justify-center">
-            <PrimaryCTA href="#cta">Ver cómo funciona con mi colegio — 20 min, sin compromiso</PrimaryCTA>
+            <PrimaryCTA href={DEMO_CTA_HREF}>Ver cómo funciona con mi colegio — 20 min, sin compromiso</PrimaryCTA>
           </div>
         </Reveal>
       </div>
@@ -1077,8 +1369,8 @@ function CTAFinal() {
 
               <div className="mt-10 flex flex-col items-start gap-3 md:flex-row md:items-center">
                 <a
-                  href="#"
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-background px-7 py-3.5 text-sm font-medium text-primary shadow-lg transition-all hover:shadow-xl md:text-base"
+                  href={DEMO_CTA_HREF}
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-background px-7 py-3.5 text-sm font-semibold text-primary shadow-lg transition-all duration-150 hover:-translate-y-[1px] hover:bg-white hover:shadow-2xl active:translate-y-px active:shadow-md focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 focus-visible:ring-offset-primary md:text-base"
                 >
                   Ver cómo funciona con mi colegio — 20 min
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
@@ -1153,7 +1445,7 @@ export function Footer() {
             <h3 className="text-sm font-semibold text-foreground">Contacto</h3>
             <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
               <li>
-                <a href="/#cta" className="transition-colors hover:text-foreground">
+                <a href={DEMO_CTA_HREF} className="transition-colors hover:text-foreground">
                   Solicitar demo
                 </a>
               </li>
@@ -1222,9 +1514,10 @@ export default function SoftwareDevelopmentWebsite() {
         <Problema />
         <Escenarios />
         <FalsoDilema />
-        <Diagnostico />
+        <EfectoEkole />
         <Solucion />
         <ComoFunciona />
+        <Diagnostico />
         <FAQ />
         <CTAFinal />
       </main>

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { AlertTriangle, ChevronDown, Info, ShieldAlert } from "lucide-react"
-import { Pill, SectionLabel } from "@/components/software-development-website"
+import { LegalCredentials, Pill, SectionLabel } from "@/components/software-development-website"
 import type { Answer, Question } from "./data"
 
 export function cn(...classes: (string | undefined | null | boolean)[]): string {
@@ -68,10 +68,10 @@ export function DocHeader() {
       <div className="mx-auto max-w-3xl px-6 text-center">
         <SectionLabel>Diagnóstico Institucional</SectionLabel>
 
-        <h1 className="mt-6 text-balance text-4xl font-medium leading-[1.1] tracking-tight text-foreground md:text-5xl">
+        {/* DS rule: "Ekole persuade" → navy headline; highlight con primary-light, no itálica */}
+        <h1 className="mt-6 text-balance text-4xl font-extrabold leading-[1.08] tracking-tight text-primary md:text-5xl">
           ¿Cuál es el nivel de exposición legal de{" "}
-          <em className="font-display font-normal italic text-primary">su institución</em>
-          ?
+          <span className="text-primary-light">su institución</span>?
         </h1>
         <p className="mx-auto mt-3 max-w-xl text-balance text-base text-foreground/70 md:text-lg">
           — y el suyo como director.
@@ -82,20 +82,12 @@ export function DocHeader() {
           responsabilidad no recae solo en el colegio.
         </p>
 
-        <div className="mt-7 flex flex-wrap items-center justify-center gap-2">
-          <RefBadge tone="primary" tooltip="Ley Federal de Protección de Datos Personales en Posesión de los Particulares. Regula cómo los colegios deben manejar información de alumnos y padres.">
-            LFPDPPP
-          </RefBadge>
-          <RefBadge tone="primary" tooltip="Derechos de Acceso, Rectificación, Cancelación y Oposición. Permiten a los padres exigir al colegio la entrega, corrección o eliminación de datos de sus hijos.">
-            Derechos ARCO
-          </RefBadge>
-          <RefBadge tone="primary" tooltip="Norma Oficial Mexicana que establece los límites máximos de emisión de ruido en fuentes fijas. Límite: 55 dB en zonas residenciales.">
-            NOM-081-SEMARNAT-1994
-          </RefBadge>
-          <RefBadge tone="primary" tooltip="Diario Oficial de la Federación. Publicación oficial donde se publican leyes, normas y disposiciones vigentes.">
-            DOF vigente 2025
-          </RefBadge>
-        </div>
+        {/* DS: Legal Credentials con escudo + separador (no pills) */}
+        <LegalCredentials
+          tone="light"
+          className="mt-7 justify-center"
+          items={["LFPDPPP", "Derechos ARCO", "NOM-081-SEMARNAT", "DOF vigente 2025"]}
+        />
 
         <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-safe/30 bg-safe-soft px-3.5 py-1.5 text-xs text-safe">
           <span className="relative flex size-1.5 items-center justify-center">
@@ -122,9 +114,7 @@ export function AlertBanner() {
             <AlertTriangle className="size-4" />
           </div>
           <div>
-            <Pill tone="risk">
-              <span className="font-mono">CCF Art. 1920</span>
-            </Pill>
+            <LegalCredentials tone="light" items={["CCF Art. 1920"]} />
             <p className="mt-2.5 text-sm leading-relaxed text-foreground/90 md:text-[15px]">
               <strong className="font-semibold text-foreground">
                 Cuando un menor está bajo la vigilancia de un director de colegio, la responsabilidad civil
@@ -147,23 +137,19 @@ export function AlertBanner() {
 
 export function LiabilityCallout() {
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-sm md:p-10">
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,hsl(var(--risk)/0.12),transparent_70%)] blur-3xl" />
-      </div>
-
-      <div className="flex items-center gap-2">
+    <div className="rounded-3xl border border-border bg-card p-8 shadow-sm md:p-10">
+      {/* DS: fondo blanco limpio, sin aurora. Acentos solo en heros / cierre */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <Pill tone="risk">
           <ShieldAlert className="size-3" />
           <span>Lo que muchos directores no saben</span>
         </Pill>
-        <span className="ml-auto font-mono text-[11px] tracking-wider text-muted-foreground">
-          CCF 1920 · CPF 335
-        </span>
+        <LegalCredentials tone="light" items={["CCF 1920", "CPF 335"]} className="ml-auto" />
       </div>
 
-      <h2 className="mt-4 max-w-2xl text-balance text-xl font-medium leading-snug tracking-tight text-foreground md:text-2xl">
-        La responsabilidad civil es <span className="text-primary">suya</span> — no del colegio.
+      {/* DS: "Ekole persuade" → navy; highlight con primary-light, no itálica */}
+      <h2 className="mt-5 max-w-2xl text-balance text-2xl font-extrabold leading-[1.15] tracking-tight text-primary md:text-3xl">
+        La responsabilidad civil es <span className="text-primary-light">suya</span> — no del colegio.
       </h2>
 
       <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-foreground/85">

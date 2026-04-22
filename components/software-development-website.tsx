@@ -141,7 +141,7 @@ export function HeroHeader() {
           <div className="flex items-center gap-2">
             <a
               href="/#cta"
-              className="hidden items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md lg:inline-flex"
+              className="hidden items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-150 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-md active:translate-y-px active:shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 lg:inline-flex"
             >
               Ver cómo funciona
               <ArrowRight className="size-3.5" />
@@ -228,7 +228,8 @@ export function PrimaryCTA({
     <a
       href={href}
       className={cn(
-        "group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-md shadow-primary/20 ring-1 ring-primary/30 transition-all hover:bg-primary/92 hover:shadow-lg hover:shadow-primary/30 md:text-base",
+        // DS: hover → bg más oscuro (primary-dark) + shadow-lg; active → translate-y-px + shadow off; focus-visible → ring sky 3px
+        "group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 ring-1 ring-primary/30 transition-all duration-150 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/35 active:translate-y-px active:shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 md:text-base",
         className,
       )}
     >
@@ -251,7 +252,8 @@ export function GhostCTA({
     <a
       href={href}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background/60 px-6 py-3 text-sm font-medium text-foreground/90 transition-all hover:border-primary/40 hover:bg-background hover:text-primary md:text-base",
+        // DS ghost: hover → bg primary/8 + border primary/50 + text primary; active → bg primary/14; focus-visible sky
+        "inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background/60 px-6 py-3 text-sm font-medium text-foreground/90 transition-all duration-150 hover:-translate-y-[1px] hover:border-primary/60 hover:bg-primary/[0.06] hover:text-primary hover:shadow-sm active:translate-y-px active:bg-primary/[0.12] active:shadow-none focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 md:text-base",
         className,
       )}
     >
@@ -266,6 +268,40 @@ export function SectionLabel({ children }: { children: React.ReactNode }) {
       <span className="h-px w-8 bg-border" />
       {children}
       <span className="h-px w-8 bg-border" />
+    </div>
+  )
+}
+
+/* ----------------------------------------------------------------
+   LegalCredential — design system component
+   Shield + text, usado SOLO para referencias a leyes/normas oficiales.
+   No es un badge/pill; comunica autoridad institucional.
+   ---------------------------------------------------------------- */
+
+export function LegalCredentials({
+  items,
+  tone = "light",
+  className,
+}: {
+  items: string[]
+  tone?: "light" | "navy"
+  className?: string
+}) {
+  const textCls = tone === "navy" ? "text-white/95" : "text-primary"
+  const iconCls = tone === "navy" ? "text-sky" : "text-primary"
+  const sepCls =
+    tone === "navy" ? "bg-white/20" : "bg-primary/20"
+  return (
+    <div className={cn("flex flex-wrap items-center gap-x-3 gap-y-2", className)}>
+      {items.map((label, i) => (
+        <React.Fragment key={label}>
+          {i > 0 && <span className={cn("h-3.5 w-px", sepCls)} aria-hidden />}
+          <span className={cn("inline-flex items-center gap-1.5 text-sm font-semibold leading-none", textCls)}>
+            <ShieldCheck className={cn("size-4", iconCls)} strokeWidth={2.25} />
+            <span>{label}</span>
+          </span>
+        </React.Fragment>
+      ))}
     </div>
   )
 }

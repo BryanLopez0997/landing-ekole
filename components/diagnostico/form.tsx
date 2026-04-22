@@ -83,21 +83,19 @@ export function LeadForm({
     { value: "mas350", label: "350+" },
   ]
 
+  // DS: input focus con primary-light (#2EB4E9) + halo 3px al 15%
   const inputCls =
-    "w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/15"
+    "w-full rounded-2xl border-[1.5px] border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground hover:border-muted-foreground/40 focus:border-primary-light focus:ring-[3px] focus:ring-primary-light/15"
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-grid opacity-[0.14] mask-fade-edges" />
-        <div className="absolute left-1/2 top-1/2 h-[400px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,hsl(var(--primary)/0.12),transparent_70%)] blur-3xl" />
-      </div>
-
+    <section className="py-16 md:py-24">
+      {/* DS: fondo blanco limpio, sin aurora. El formulario es el protagonista. */}
       <div className="mx-auto max-w-2xl px-6">
         <Reveal>
           <div className="text-center">
             <SectionLabel>Material de protección legal</SectionLabel>
-            <h2 className="mt-6 text-balance text-2xl font-medium leading-tight tracking-tight text-foreground md:text-3xl">
+            {/* DS: "Ekole cierra" → navy; sin itálica */}
+            <h2 className="mt-6 text-balance text-2xl font-extrabold leading-tight tracking-tight text-primary md:text-3xl">
               {title}
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-balance text-base leading-relaxed text-muted-foreground">
@@ -207,7 +205,7 @@ export function LeadForm({
 
               <button
                 type="submit"
-                className="group mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-4 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 ring-1 ring-primary/30 transition-all hover:bg-primary/92 hover:shadow-lg md:text-base"
+                className="group mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-4 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 ring-1 ring-primary/30 transition-all duration-150 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/35 active:translate-y-px active:shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 md:text-base"
               >
                 {btn}
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
@@ -272,8 +270,9 @@ export function ThankYou({
             <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-safe-soft text-safe">
               <Check className="size-7" strokeWidth={2.5} />
             </div>
-            <h2 className="mt-6 text-3xl font-medium leading-tight tracking-tight text-foreground md:text-4xl">
-              {firstName}, <em className="font-display font-normal italic text-primary">recibido.</em>
+            {/* DS: "Ekole cierra" → navy; énfasis con color primary-light, sin itálica */}
+            <h2 className="mt-6 text-3xl font-extrabold leading-tight tracking-tight text-primary md:text-4xl">
+              {firstName}, <span className="text-primary-light">recibido.</span>
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-balance text-base leading-relaxed text-muted-foreground">
               {urgent ? (

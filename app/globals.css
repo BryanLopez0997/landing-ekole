@@ -21,6 +21,9 @@
     --popover-foreground: 220 35% 11%;
     --primary: 220 70% 22%;
     --primary-foreground: 40 30% 98%;
+    --primary-light: 198 80% 55%;
+    --primary-dark: 214 68% 19%;
+    --sky: 192 72% 63%;
     --secondary: 220 20% 94%;
     --secondary-foreground: 220 50% 20%;
     --muted: 220 15% 96%;
